@@ -1,7 +1,10 @@
 library(data.table)
 library(dplyr)
+library(tidyr)
 
 #Load training data
+print("Loading Common Data")
+
 fileName <- "./data/UCI HAR Dataset/features.txt"
 features <- read.table(fileName, col.names = c("field","feature"), stringsAsFactors = FALSE)
 fieldNames <- features[,2]
@@ -12,8 +15,11 @@ dtActivityLabels <- data.table(rawActivityLabels)
 rm(rawActivityLabels)
 setkey(dtActivityLabels,ActivityClass)
 
+print("Loading Training Data")
+
 fileName <- "./data/UCI HAR Dataset/train/subject_train.txt"
 rawTrainSubjects <- read.table(fileName,col.names="Subject")
+
 
 fileName <- "./data/UCI HAR Dataset/train/y_train.txt"
 rawTrainActivities  <- read.table(fileName,col.names = "ActivityClass")
@@ -45,7 +51,9 @@ cleanSubNames[-xyzDimensions] <- paste(cleanSubNames[-xyzDimensions],"-Other",se
 colnames(tblTrainSubSet) <- cleanSubNames
 tblTrainSubSet <- mutate(tblTrainSubSet, Activity = dtActivityDetail$Activity, Subject = rawTrainSubjects$Subject)
 
-#Load testing data
+#Load test data
+
+print("Loading Test Data")
 
 fileName <- "./data/UCI HAR Dataset/test/subject_test.txt"
 rawTestSubjects <- read.table(fileName,col.names="Subject")
@@ -66,13 +74,31 @@ tblTestData <- tbl_df(rawTestData)
 rm(rawTestData)
 
 tblTestSubSet  <- select(tblTestData,one_of(subColumnNames))
-#rm(tblTestData)
+rm(tblTestData)
+
 colnames(tblTestSubSet) <- cleanSubNames
-tblTestSubSet <- mutate(tblTestSubSet, Activity = dtActivityDetail$Activity, Subject = rawTestSubjects$Subject)
+tblTestSubSet <- mutate(tblTestSubSet, Activity = dtActivityDetail$Activity, 
+                        Subject = rawTestSubjects$Subject)
 
-tblData <-  merge(tblTrainSubSet,tblTestSubSet,all = TRUE)
+print("Merging UnTidy Data")
 
-#write.table(x = tblData,"./data/MergedData.txt", row.name=FALSE)
-save(tblData, file = "data/MergedData.RData")
+dfData <-  merge(tblTrainSubSet,tblTestSubSet,all = TRUE)
 
-print("Data Creation Compplete")
+
+save(dfData, file = "data/MergedData.RData")
+
+print("Data Merging Complete")
+
+print("Tidying Data")
+
+tblData <- tbl_df(dfData)
+
+tblData %>%
+    gather(sensor_stat_dim,Measure,1:66,-(67:68)) %>%
+    separate(sensor_stat_dim,c("Sensor","Statistic","Dimension")) %>%
+    select(Subject,Activity,Sensor,Statistic,Dimension,Measure) %>% 
+    arrange(Subject,Activity,Sensor,Dimension,Statistic) -> tblTidy
+
+write.table(x = tblTidy,"./data/TidyData.txt", row.name=FALSE)
+
+print("Data Tidying Complete")
