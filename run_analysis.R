@@ -96,7 +96,9 @@ tblData <- tbl_df(dfData)
 tblData %>%
     gather(sensor_stat_dim,Measure,1:66,-(67:68)) %>%
     separate(sensor_stat_dim,c("Sensor","Statistic","Dimension")) %>%
-    select(Subject,Activity,Sensor,Statistic,Dimension,Measure) %>% 
+    select(Subject,Activity,Sensor,Statistic,Dimension,Measure) %>%
+    group_by(Subject,Activity,Sensor,Statistic,Dimension) %>%
+    summarize(mean(Measure)) %>%
     arrange(Subject,Activity,Sensor,Dimension,Statistic) -> tblTidy
 
 write.table(x = tblTidy,"./data/TidyData.txt", row.name=FALSE)
