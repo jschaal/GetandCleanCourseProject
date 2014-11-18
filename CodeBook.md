@@ -5,7 +5,9 @@ output: html_document
 ---
 
 ##Introduction
-Data Set Code Book: Means of Means and Standard Deviations of Wearable Computing Acceleration Data
+Data Set Code Book: **Means of Selected Wearable Computing Acceleration Data**
+
+Data Set Name: **TidyData.txt**
 
 This data called TidyData.txt represents the means of a number of dimensional measurements from a series of acceleration sensors (accelerometers and gyroscopes) captured from an experiment of 30 volunteers utilizing fitness based wearable computing devices.    
 
@@ -16,38 +18,38 @@ Version 1.0** by  Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca On
 
 ## Methodology
 
-The file TidyData.txt represents a series of transformations and summarizations of the underlying raw data.  The data is presented in Long Format and consists of the mean of of the measurement of selected captured data associated with one of 17 sensors measured in the experiment, grouped by subject, activity, the measured dimension, the sensor measured and that statistic captured.   The raw data consists of 561 sensor/dimension/statistic combinations.   This data sample is restricted to include only those measurements from the sensors that provided mean and standard deviation data.  Variables were included if and only if the underlying raw variable name contained a refernece to a mean or standard deviation statistic (std).
+The file TidyData.txt represents a series of transformations and summarizations of the underlying raw data.  The data is presented in Long Format and consists of the mean of of the measurement of selected captured data associated with one of 17 sensors measured in the experiment, grouped by subject, activity, the measured dimension, the sensor measured and that statistic captured.   The raw data consists of 561 sensor/dimension/statistic combinations.   This data sample is restricted to include only those measurements from the sensors that provided mean and standard deviation data.  Variables were included if and only if the underlying raw variable name contained a reference to a mean or standard deviation statistic (std).
 
-Of 561 variables in the raw data, 68 variables provided mean and standard deviation information for different sensors for different physical dimensions.  This data was further transformed so all measurements were presented in long form, with each row of the data source representing the mean of a single measurement, as a function of the subject, activity, sensor, statistic and dimension of the objservation.  different measures, which are a combination of an underlying sensor and a specific statistical calculation.   
+Of 561 variables in the raw data, 68 variables provided mean and standard deviation information for different sensors for different physical dimensions.  This data was further transformed so all measurements were presented in long form, with each row of the data source representing the mean of a single measurement, as a function of the subject, activity, sensor, statistic and dimension of the observation.  different measures, which are a combination of an underlying sensor and a specific statistical calculation.   
 
 ##Variable Descriptions
 |**Element**            |**Information**
 |--------------         |-----------
-|**Variable**           |Subject
+|**Variable**           |*Subject*
 |**Variable Type**      |Integer
 |**Allowable Values**   |1-30 representing the subject who was measured
 |**Comments**           |                                                   |                                             
 |                       |                                                   |
-|**Variable**           |Activity
+|**Variable**           |*Activity*
 |**Variable Type**      |Character (18)
 |**Allowable Values**   |WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING and LAYING
 |**Comments**           |One of 6 different activities performed by the subject                                                    |                       |                                                   |
-|**Variable**           |Sensor
+|**Variable**           |*Sensor*
 |**Variable Type**      |Character (20)
 |**Allowable Values**   |fBodyAcc, fBodyAccJerk, fBodyAccMag, fBodyBodyAccJerkMag, fBodyBodyGyroJerkMag, fBodyBodyGyroMag, fBodyGyro, tBodyAcc, tBodyAccJerk, tBodyAccJerkMag, tBodyAccMag, tBodyGyro, tBodyGyroJerk, tBodyGyroJerkMag, tBodyGyroMag, tGravityAcc, tGravityAccMag
 |**Comments**           |Which of the 17 different sensors the measurement was captured from  
 |                       |                                                   |
-|**Variable**           |Statistic
+|**Variable**           |*Statistic*
 |**Variable Type**      |Character (4)
 |**Allowable Values**   |Mean, Std
 |**Comments**           |The statistic, mean or standard deviation (std), of the measurement
 |                       |                                                   |
-|**Variable**           |Dimension
+|**Variable**           |*Dimension*
 |**Variable Type**      |Character (5)
 |**Allowable Values**   |X, Y, Z, Other
 |**Comments**           |The physical orientation (axis) of the sensor used to calculate the measurement. Sensors with no X, Y, or Z axis are labeled as Other.
 |                       |                                                   |
-|**Variable**           |Mean
+|**Variable**           |*Mean*
 |**Variable Type**      |Double
 |**Allowable Values**   |Numeric (Double)
 |**Comments**           |The mean of the measurement for the given subject, activity, sensor, statistic and dimension in standard gravity units g.
