@@ -1,9 +1,9 @@
 Get and Clean Course Project
 ============================
 
-The purpose of this project is to to prepare tidy data set from a summary of raw data produced during measurement experiments of fitness oriented wearable computing devices produced by Samsung.
+The purpose of this project is to prepare a tidy data set from a summary of raw data produced during measurement experiments of fitness oriented wearable computing devices.
 
-The raw data contains numerous measurements of **three** dimensional acceleration from **six** different activities conducted on **30** experiment subjects in **two** conditions, *training* and *testing*.   The raw data consists of **68** measurements but the data we are interested in is only for those measurements which are **mean** and **standard deviation** calculations of specific dimensional accelerations.
+The raw data contains numerous measurements of **three** dimensional acceleration from **six** different activities conducted on **30** experiment subjects in **two** conditions, *training* and *testing*.   The raw data consists of **561** different measurements but the data we are interested in is only for those **68** measurements which are **mean** and **standard deviation** calculations of specific dimensional accelerations.
 
 The resulting tidy data is produced by a script called **run_analysis.R**.   The script produces a number of out puts, stored in the data directory of the working directory, including an R formatted extract called **MergedData.RData** and the final **long formatted** tidy dataset in standard R text format called **TidyData.txt**.
 
