@@ -108,11 +108,12 @@ tblData %>%
     separate(sensor_stat_dim,c("Sensor","Statistic","Dimension")) %>%
     select(Subject,Activity,Sensor,Statistic,Dimension,Measure) %>%
     group_by(Subject,Activity,Sensor,Statistic,Dimension) %>%
-    summarize(mean(Measure)) %>%
+    summarize(Mean = mean(Measure)) %>%
     arrange(Subject,Activity,Sensor,Dimension,Statistic) -> tblTidy
 
 #   Write final tidy data extract file
 write.table(x = tblTidy,"./data/TidyData.txt", row.name=FALSE)
+save(tblData, file = "data/TidyData.RData")
 
 print("Data Tidying Complete")
 print(paste("Total Tidy Data Rows:",as.character(nrow(tblTidy))))
